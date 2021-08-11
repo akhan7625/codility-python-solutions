@@ -1,19 +1,39 @@
 A = [3, 4, 3, 2, 3, -1, 3, 3]
 
 
-def solution(A):
+def solution2(A):
     N = len(A)
-    dom_min = N / 2
-    for i, value in enumerate(A):
-        cur_max_count = A.count(value)
-        if N == 0:
-            return -1
-        elif cur_max_count > dom_min:
-            return i
-    return -1
+    dom = 0
+    dom_count = 0
+    dom_index = 0
+    for i in range(N):
+        if dom_count == 0:
+            dom = A[i]
+            dom_index = i
+            dom_count += 1
+        else:
+            if A[i] == dom:
+                dom_count += 1
+            else:
+                dom_count -= 1
+    if len([num for num in A if num == dom]) <= N // 2:
+        return -1
+    else:
+        return dom_index
 
-
-print(solution(A))
+# def solution(A):
+#     N = len(A)
+#     dom_min = N / 2
+#     for i, value in enumerate(A):
+#         cur_max_count = A.count(value)
+#         if N == 0:
+#             return -1
+#         elif cur_max_count > dom_min:
+#             return i
+#     return -1
+#
+#
+# print(solution(A))
 
 # only received 83% score due to time out errors below
 
